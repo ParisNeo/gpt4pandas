@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='gpt4pandas',
-    version='0.1',
+    version='0.2',
     packages=find_packages(),
     license='Apache License 2.0',
     description='A tool that uses the GPT4ALL language model and the Pandas library to answer questions about dataframes',
