@@ -59,7 +59,7 @@ answer = gpt.ask(question)
 print(answer)  # Output: "mean(Salary)"
 
 # Ask another question
-question = "What is the maximum age in the dataset?"
+question = "Whhich person is oldest?"
 print(question)
 answer = gpt.ask(question)
 print(answer)  # Output: "max(Age)"
@@ -73,9 +73,10 @@ new_data = {
 }
 new_df = pd.DataFrame(new_data)
 print("Dataframe")
-print(df)
+print(new_df)
 
 gpt.set_dataframe(new_df)
-question = "What is the minimum salary in Tokyo?"
+question = "What is salary in Tokyo?"
+print(question)
 answer = gpt.ask(question)
 print(answer)  # Output: "min(Salary) where City is Tokyo"

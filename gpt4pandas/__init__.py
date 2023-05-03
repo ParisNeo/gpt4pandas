@@ -31,11 +31,11 @@ class GPT4Pandas:
     def set_dataframe(self, df):
         self.df = df
         
-    def ask(self, question):
+    def ask(self, question, n_predict=50, temp=0.1, top_k=5, top_p=0.98, n_threads=8):
         # Combine the question and dataframe into a single input string
         prompt = f"## Dataframe:\n {self.df.to_string(index=False)}\n## Question:\n{question}\n## Answer:\n"
         output = ""
-        for tok in self.model.generate(prompt):
+        for tok in self.model.generate(prompt, n_threads=n_threads, n_predict=n_predict, temp=temp, top_k=top_k, top_p=top_p):
             output += tok
             if any(antiprompt.lower() in output.lower() for antiprompt in self.antiprompts):
                 break
