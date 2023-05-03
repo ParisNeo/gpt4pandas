@@ -11,22 +11,119 @@ pip install gpt4all-pandasqa
 
 ## Usage
 
-To use GPT4ALL Pandas Q&A, you can import the `PandasQA` class and create an instance of it with your dataframe:
+To use GPT4ALL Pandas Q&A, you can import the `GPT4Pandas` class and create an instance of it with your dataframe:
+```python
+import pandas as pd
+from gpt4pandas import GPT4Pandas
+# Load a sample dataframe
+data = {
+    "Name": ["Alice", "Bob", "Charlie"],
+    "Age": [25, 30, 35],
+    "City": ["New York", "Paris", "London"],
+    "Salary": [50000, 60000, 70000],
+}
+df = pd.DataFrame(data)
+
+# Initialize the GPT4Pandas model
+model_path = <the path to the model file>
+gpt = GPT4Pandas(model_path, df, verbose=False)
+```
+
+Then ask a question about your dataframe:
+
+```python
+# Ask a question about the dataframe
+question = "What is the average salary?"
+print(question)
+answer = gpt.ask(question)
+print(answer)  # Output: "mean(Salary)"
+```
+
+Here is a complete example that you can also find in examples folder :
 
 ```python
 import pandas as pd
-from gpt4all_pandasqa import PandasQA
+from gpt4pandas import GPT4Pandas
+from pathlib import Path
+from tqdm import tqdm
+import urllib
+import sys
 
-df = pd.read_csv('my_data.csv')
+# If there is no model, then download one 
+# These models can be automatically downloaded, uncomment the model you want to use
+# url = "https://huggingface.co/ParisNeo/GPT4All/resolve/main/gpt4all-lora-quantized-ggml.bin"
+# url = "https://huggingface.co/ParisNeo/GPT4All/resolve/main/gpt4all-lora-unfiltered-quantized.new.bin"
+# url = "https://huggingface.co/eachadea/legacy-ggml-vicuna-7b-4bit/resolve/main/ggml-vicuna-7b-4bit-rev1.bin"
+url = "https://huggingface.co/eachadea/ggml-vicuna-13b-4bit/resolve/main/ggml-vicuna-13b-4bit-rev1.bin"
+model_name  = url.split("/")[-1]
+folder_path = Path("models/")
 
-pandasqa = PandasQA(df)
-```
-Once you have an instance of PandasQA, you can ask it questions about your dataframe:
+model_full_path = (folder_path / model_name)
 
-```python
-answer = pandasqa.ask('What is the average value of column X?')
+# ++++++++++++++++++++ Model downloading +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Check if file already exists in folder
+if model_full_path.exists():
+    print("File already exists in folder")
+else:
+    # Create folder if it doesn't exist
+    folder_path.mkdir(parents=True, exist_ok=True)
+    progress_bar = tqdm(total=None, unit="B", unit_scale=True, desc=f"Downloading {url.split('/')[-1]}")
+    # Define callback function for urlretrieve
+    def report_progress(block_num, block_size, total_size):
+        progress_bar.total=total_size
+        progress_bar.update(block_size)
+    # Download file from URL to folder
+    try:
+        urllib.request.urlretrieve(url, folder_path / url.split("/")[-1], reporthook=report_progress)
+        print("File downloaded successfully!")
+    except Exception as e:
+        print("Error downloading file:", e)
+        sys.exit(1)
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-print(answer)
+# Load a sample dataframe
+data = {
+    "Name": ["Alice", "Bob", "Charlie"],
+    "Age": [25, 30, 35],
+    "City": ["New York", "Paris", "London"],
+    "Salary": [50000, 60000, 70000],
+}
+df = pd.DataFrame(data)
+
+# Initialize the GPT4Pandas model
+model_path = "models/"+model_name
+gpt = GPT4Pandas(model_path, df, verbose=False)
+
+print("Dataframe")
+print(df)
+# Ask a question about the dataframe
+question = "What is the average salary?"
+print(question)
+answer = gpt.ask(question)
+print(answer)  # Output: "mean(Salary)"
+
+# Ask another question
+question = "Which person is youngest?"
+print(question)
+answer = gpt.ask(question)
+print(answer)  # Output: "max(Age)"
+
+# Set a new dataframe and ask a question
+new_data = {
+    "Name": ["David", "Emily"],
+    "Age": [40, 45],
+    "City": ["Berlin", "Tokyo"],
+    "Salary": [80000, 90000],
+}
+new_df = pd.DataFrame(new_data)
+print("Dataframe")
+print(new_df)
+
+gpt.set_dataframe(new_df)
+question = "What is salary in Tokyo?"
+print(question)
+answer = gpt.ask(question)
+print(answer)  # Output: "min(Salary) where City is Tokyo"
 ```
 
 This will output the answer to your question.
