@@ -127,6 +127,25 @@ print(answer)  # Output: "min(Salary) where City is Tokyo"
 ```
 
 This will output the answer to your question.
+Here is one of the answers :
 
-License
+```
+Dataframe
+      Name  Age      City  Salary
+0    Alice   25  New York   50000
+1      Bob   30     Paris   60000
+2  Charlie   35    London   70000
+What is the average salary?
+The average salary is $60,000.
+Which person is youngest?
+Alice is the youngest.
+Dataframe
+    Name  Age    City  Salary
+0  David   40  Berlin   80000
+1  Emily   45   Tokyo   90000
+What is salary in Tokyo?
+The salary in Tokyo is $90,000.
+```
+
+# License
 GPT4ALL Pandas Q&A is licensed under the Apache License, Version 2.0. See the LICENSE file for more information.
