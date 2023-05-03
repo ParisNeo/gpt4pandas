@@ -1,6 +1,6 @@
-# GPT4ALL Pandas Q&A
+# GPT4Pandas
 
-GPT4ALL Pandas Q&A is a tool that uses the GPT4ALL language model and the Pandas library to answer questions about dataframes. With this tool, you can easily get answers to questions about your dataframes without needing to write any code.
+GPT4Pandas is a tool that uses the GPT4ALL language model and the Pandas library to answer questions about dataframes. With this tool, you can easily get answers to questions about your dataframes without needing to write any code.
 
 ## Installation
 
