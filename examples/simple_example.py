@@ -59,7 +59,7 @@ answer = gpt.ask(question)
 print(answer)  # Output: "mean(Salary)"
 
 # Ask another question
-question = "Which person is oldest?"
+question = "Which person is youngest?"
 print(question)
 answer = gpt.ask(question)
 print(answer)  # Output: "max(Age)"
