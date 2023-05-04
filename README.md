@@ -146,6 +146,12 @@ Dataframe
 What is salary in Tokyo?
 The salary in Tokyo is $90,000.
 ```
+tested using vcuna 7B model.
+
+# limitations
+
+Please notice that the results depend on the model size, context size and dataframe size. if the dataframe is bigger than the context, you'll have an error.
+
 
 # License
 GPT4ALL Pandas Q&A is licensed under the Apache License, Version 2.0. See the LICENSE file for more information.
