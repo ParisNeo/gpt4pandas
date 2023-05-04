@@ -6,7 +6,7 @@ GPT4Pandas is a tool that uses the GPT4ALL language model and the Pandas library
 
 To install GPT4ALL Pandas Q&A, you can use pip:
 ```bash
-pip install gpt4all-pandasqa
+pip install gpt4pandas
 ```
 
 ## Usage
