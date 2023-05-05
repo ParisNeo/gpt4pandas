@@ -1,4 +1,6 @@
 # GPT4Pandas
+[![Follow me on Twitter](https://img.shields.io/twitter/follow/SpaceNerduino?style=social)](https://twitter.com/SpaceNerduino)
+[![Follow me on YouTube](https://img.shields.io/badge/Watch%20on-YouTube-red?style=flat&logo=youtube)](https://www.youtube.com/@Parisneo)
 
 GPT4Pandas is a tool that uses the GPT4ALL language model and the Pandas library to answer questions about dataframes. With this tool, you can easily get answers to questions about your dataframes without needing to write any code.
 
