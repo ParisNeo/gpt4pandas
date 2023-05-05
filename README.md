@@ -149,7 +149,7 @@ Dataframe
 What is salary in Tokyo?
 The salary in Tokyo is $90,000.
 ```
-tested using vcuna 7B model.
+tested using vcuna 13B model.
 
 # limitations
 
